@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Extract text from screenshots and images using OCR.">
+  <title>OCR Text Extractor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('ocr.index') }}"><span class="brand-mark">O</span> OCR Text Extractor</a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="{{ url_for('ocr.about') }}">About</a>
+      <a class="nav-download" href="{{ url_for('ocr.download_source') }}">Download source code <span aria-hidden="true">↓</span></a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <p class="eyebrow">IMAGE TO TEXT</p>
+      <h1>Turn screenshots into <span>searchable text.</span></h1>
+      <p class="intro-copy">Upload an image, extract its text, then copy the result or save it as a plain-text file.</p>
+    </section>
+
+    {% if error %}
+      <div class="alert" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <section class="workspace">
+      <form class="upload-card" action="{{ url_for('ocr.extract') }}" method="post" enctype="multipart/form-data" id="upload-form">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">STEP 01</p>
+            <h2>Upload an image</h2>
+          </div>
+          <span class="file-limit">Max 10 MB</span>
+        </div>
+
+        <label class="drop-zone" for="image-file" id="drop-zone">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong id="file-label">Choose a screenshot or drop it here</strong>
+          <span class="muted">PNG, JPG, JPEG, BMP, TIFF or WEBP</span>
+          <input type="file" id="image-file" name="image_file" accept=".png,.jpg,.jpeg,.bmp,.tif,.tiff,.webp,image/*" required>
+          <span class="browse-button">Browse files</span>
+        </label>
+
+        <div class="preview-wrap" id="preview-wrap" hidden>
+          <img id="image-preview" alt="Selected image preview">
+          <button class="text-button" type="button" id="clear-image">Remove image</button>
+        </div>
+        <button class="primary-button full-width" type="submit" id="extract-button">Extract text <span aria-hidden="true">→</span></button>
+        <p class="privacy-note">The uploaded image is processed temporarily and removed after extraction.</p>
+      </form>
+
+      <section class="result-card" aria-labelledby="result-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">STEP 02</p>
+            <h2 id="result-title">Extracted text</h2>
+          </div>
+          <span class="status-pill" id="result-status">{{ 'Ready to use' if extracted_text else 'Waiting for image' }}</span>
+        </div>
+
+        <textarea id="extracted-text" spellcheck="false" placeholder="Your extracted text will appear here. You can edit it before copying or downloading." aria-label="Extracted text">{{ extracted_text }}</textarea>
+        <div class="result-meta"><span id="character-count">{{ extracted_text|length }} characters</span><span>Plain text · UTF-8</span></div>
+
+        <div class="result-actions">
+          <button type="button" class="secondary-button" id="copy-button">Copy text</button>
+          {% if result_filename %}
+          <a class="primary-button download-button" href="{{ url_for('ocr.download_txt', filename=result_filename) }}">Download .txt <span aria-hidden="true">↓</span></a>
+          {% else %}
+          <button type="button" class="primary-button" id="download-button">Download .txt <span aria-hidden="true">↓</span></button>
+          {% endif %}
+        </div>
+        <p class="feedback" id="feedback" aria-live="polite"></p>
+      </section>
+    </section>
+
+    <section class="how-it-works">
+      <h2>Designed for a simple workflow</h2>
+      <div class="steps">
+        <article><span>1</span><div><h3>Upload</h3><p>Select a screenshot or image file.</p></div></article>
+        <article><span>2</span><div><h3>Extract</h3><p>OCR converts visible characters into text.</p></div></article>
+        <article><span>3</span><div><h3>Export</h3><p>Copy, edit, or download the result.</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>OCR Text Extractor</span><span>Built with Flask and Tesseract OCR</span></footer>
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

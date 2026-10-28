@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About the OCR Text Extractor project, its purpose, requirements, features, and technology.">
+  <title>About | OCR Text Extractor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{{ url_for('ocr.index') }}"><span class="brand-mark">O</span> OCR Text Extractor</a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a class="active" href="{{ url_for('ocr.about') }}" aria-current="page">About</a>
+      <a class="nav-download" href="{{ url_for('ocr.download_source') }}">Download source code <span aria-hidden="true">↓</span></a>
+    </nav>
+  </header>
+
+  <main class="page-shell about-shell">
+    <section class="intro about-intro">
+      <p class="eyebrow">PROJECT OVERVIEW</p>
+      <h1>About <span>OCR Text Extractor.</span></h1>
+      <p class="intro-copy">A lightweight web application that converts text in screenshots and image files into editable, downloadable text using PaddleOCR.</p>
+      <div class="about-hero-actions">
+        <a class="primary-button" href="{{ url_for('ocr.index') }}">Try the extractor <span aria-hidden="true">→</span></a>
+        <a class="secondary-button" href="{{ url_for('ocr.download_source') }}">Download source code</a>
+      </div>
+    </section>
+
+    <section class="about-grid" aria-label="Project requirements">
+      <article class="about-panel about-panel-wide">
+        <p class="step-label">01 · PURPOSE</p>
+        <h2>Problem statement</h2>
+        <p>Manually transcribing text from screenshots and images can be slow and error-prone. This project provides a simple browser-based workflow for extracting printed text so users can reuse it in documents, notes, and other applications.</p>
+      </article>
+      <article class="about-panel">
+        <p class="step-label">02 · OBJECTIVES</p>
+        <h2>Project objectives</h2>
+        <ul>
+          <li>Accept common image formats.</li>
+          <li>Extract text with PaddleOCR.</li>
+          <li>Present the result in an editable text area.</li>
+          <li>Save and download text as a UTF-8 TXT file.</li>
+        </ul>
+      </article>
+      <article class="about-panel">
+        <p class="step-label">03 · USERS</p>
+        <h2>Intended users</h2>
+        <p>Students, educators, office workers, researchers, and anyone who needs to copy printed text from screenshots or image files.</p>
+      </article>
+      <article class="about-panel">
+        <p class="step-label">04 · CORE FEATURES</p>
+        <h2>Functional requirements</h2>
+        <ul>
+          <li>Upload PNG, JPG/JPEG, BMP, TIFF, or WEBP images up to 10 MB.</li>
+          <li>Preview the selected image before extraction.</li>
+          <li>Display extracted text and allow editing.</li>
+          <li>Copy text to the clipboard.</li>
+          <li>Save extracted output in the server's <code>output/</code> folder and download it.</li>
+        </ul>
+      </article>
+      <article class="about-panel">
+        <p class="step-label">05 · WORKFLOW</p>
+        <h2>How it works</h2>
+        <ol>
+          <li>Select or drop an image into the upload area.</li>
+          <li>Submit the image for OCR processing.</li>
+          <li>Review and edit the recognized text.</li>
+          <li>Copy the text or download the TXT result.</li>
+        </ol>
+      </article>
+      <article class="about-panel about-panel-wide">
+        <p class="step-label">06 · TECHNOLOGY</p>
+        <h2>Technology stack</h2>
+        <div class="tech-tags">
+          <span>Python</span><span>Flask</span><span>PaddleOCR</span><span>PaddlePaddle</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+        </div>
+        <p class="muted about-note">The OCR service currently uses PaddleOCR configured for English text (<code>lang="en"</code>) with angle classification enabled. Recognition quality depends on image clarity, orientation, and text layout.</p>
+      </article>
+      <article class="about-panel about-panel-wide">
+        <p class="step-label">07 · NON-FUNCTIONAL REQUIREMENTS</p>
+        <h2>Usability, validation, and privacy</h2>
+        <ul class="two-column-list">
+          <li>Responsive interface for desktop and mobile screens.</li>
+          <li>Validate file type and enforce an upload size limit.</li>
+          <li>Use unique filenames for generated results.</li>
+          <li>Remove temporary uploaded images after processing.</li>
+          <li>Handle missing files and OCR errors with clear messages.</li>
+          <li>Keep generated TXT files on the server until cleaned up by the operator.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="about-cta">
+      <div><h2>Explore the project</h2><p>Try the OCR workflow or download the source code to review the implementation.</p></div>
+      <div class="about-hero-actions">
+        <a class="primary-button" href="{{ url_for('ocr.index') }}">Open extractor</a>
+        <a class="secondary-button" href="{{ url_for('ocr.download_source') }}">Download source</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>OCR Text Extractor</span><span>Built with Flask and PaddleOCR</span></footer>
+</body>
+</html>
