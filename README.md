@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # OCR Text Extractor
 
 A Flask portfolio project that extracts text from screenshots and images using your existing PaddleOCR implementation.
@@ -83,3 +84,6 @@ Extracted text files are written to `output/` using unique filenames. The UI pro
 - **PaddleOCR/PaddlePaddle installation errors:** Confirm that your Python version and operating system are supported by the installed PaddlePaddle wheel, then reinstall using the compatible instructions.
 - **No text detected:** Try a sharper, higher-resolution screenshot with good contrast.
 - **Indonesian text is inaccurate:** Install Indonesian language data and configure the OCR language as described above.
+=======
+# ocr-text-extractor
+A lightweight web application that converts text in screenshots and image files into editable, downloadable text using PaddleOCR.
